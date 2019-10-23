@@ -15,7 +15,7 @@ MAKE = make
 LINK = g++ -fPIC -g
 LOCAL_UTIL_LIBRARIES = ../lib/libcryph.so ../lib/libfont.so ../lib/libglsl.so ../lib/libImageReader.so ../lib/libmvc.so
 
-OBJS = main.o ExtendedController.o TEMPLATE_Subclass.o
+OBJS = main.o ExtendedController.o Shelf.o
 
 main: $(OBJS) $(LOCAL_UTIL_LIBRARIES)
 	$(LINK) -o main $(OBJS) $(LOCAL_UTIL_LIBRARIES) $(GL_LIBRARIES)
@@ -39,5 +39,5 @@ main.o: main.c++
 	$(CPP) $(C_FLAGS) main.c++
 ExtendedController.o: ExtendedController.c++
 	$(CPP) $(C_FLAGS) ExtendedController.c++
-TEMPLATE_Subclass.o: TEMPLATE_Subclass.h TEMPLATE_Subclass.c++
-	$(CPP) $(C_FLAGS) TEMPLATE_Subclass.c++
+Shelf.o: Shelf.h Shelf.c++
+	$(CPP) $(C_FLAGS) Shelf.c++
