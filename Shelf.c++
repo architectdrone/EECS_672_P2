@@ -48,7 +48,7 @@ void Shelf::renderXxx()
 	// ...
 }
 
-void Shelf::defineShelf(cryph::AffPoint origin, float sw, float sd, float sh, float pw, float pd, float ph, float d)
+void Shelf::defineShelf()
 {
 	typedef float vec3[3];
 	cryph::AffPoint vertex[20];

@@ -17,13 +17,14 @@ public:
 	void getMCBoundingBox(double* xyzLimitsF) const;
 	void render();
 	void renderXxx();
-	void defineShelf(cryph::AffPoint origin, float sw, float sd, float sh, float pw, float pd, float ph, float d);
+	void defineShelf();
 
 private:
 	ShaderIF* shaderIF;
 	GLuint vao[1];
 	GLuint vbo[1];
 
+	cryph::AffPoint origin;
 	float sw;
 	float sd;
 	float sh;
