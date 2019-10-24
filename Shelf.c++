@@ -66,8 +66,15 @@ void Shelf::render()
 
 void Shelf::renderShelf()
 {
-	for (int i = 0; i < sizeof(blocks); i++)
+	printf("JESYUS");
+	for (int i = 0; i < 1; i++)
 	{
 		blocks[i]->render();
+		printf("YOU");
 	}
+	for (int i = 0; i < 2; i++)
+	{
+		prisms[i]->render();
+	}
+	printf("HEY");
 }

@@ -76,9 +76,10 @@ void Prism::definePrism()
 	vec3 vertices[6];
 	for (int i = 0; i < 6; i++)
 	{
-		vertices[i][0] = points[0].x;
-		vertices[i][0] = points[0].y;
-		vertices[i][0] = points[0].z;
+		vertices[i][0] = points[i].x;
+		vertices[i][1] = points[i].y;
+		vertices[i][2] = points[i].z;
+		//printf("%d %d %d\n", );
 	}
 
 	//Send these points to the GPU
