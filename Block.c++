@@ -9,11 +9,9 @@ typedef float vec3[3];
 
 // index lists for the three faces that can't be drawn with glDrawArrays
 GLuint Block::indexList[3][4] = {
-	// Fill in the proper values
-	// See the 672 InClass/3DModeling/glDrawElements.html web page
-	{ 0, 0, 0, 0 }, // xmin face
-	{ 0, 0, 0, 0 }, // ymin face
-	{ 0, 0, 0, 0 }  // ymax face
+	{ 6, 7, 0, 1 }, // xmin face
+	{ 6, 0, 4, 2 }, // ymin face
+	{ 1, 7, 3, 5 }  // ymax face
 };
 
 Block::Block(ShaderIF* sIF, float cx, float cy, float cz, float lx, float ly, float lz) :
@@ -95,8 +93,14 @@ void Block::renderBlock()
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), -1.0, 0.0, 0.0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo[0]);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, nullptr);
-	// TODO: Finish the rest of these glDrawElements calls. If you
-	//       need a hint, review 672's InClass/3DModeling/glDrawElements.html web page
+
+	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, -1.0, 0.0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo[1]);
+	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, nullptr);
+
+	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, 1.0, 0.0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo[1]);
+	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, nullptr);
 }
 
 void Block::render()
