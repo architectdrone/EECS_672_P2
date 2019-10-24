@@ -5,7 +5,7 @@
 
 typedef float vec3[3];
 
-Prism::Prism(ShaderIF* sIF, cryph::AffPoint _origin, float _w, float _d, float _h, vec3 _c1, vec3 _c2,) : shaderIF(sIF)
+Prism::Prism(ShaderIF* sIF, cryph::AffPoint _origin, float _w, float _d, float _h, vec3 _c1, vec3 _c2) : shaderIF(sIF)
 {
 	/*
 	c1 is the color of the rectangular faces.
@@ -19,9 +19,12 @@ Prism::Prism(ShaderIF* sIF, cryph::AffPoint _origin, float _w, float _d, float _
 	w = _w;
 	d = _d;
 	h = _h;
-	c1 = _c1;
-	c2 = _c2;
-	kd[0] = 0.0; kd[1] = 1.0; kd[2] = 0.0;
+	c1[0] = _c1[0];
+	c1[1] = _c1[1];
+	c1[2] = _c1[2];
+	c2[0] = _c2[0];
+	c2[1] = _c2[1];
+	c2[2] = _c2[2];
 	definePrism();
 }
 
@@ -34,7 +37,7 @@ Prism::~Prism()
 // xyzLimits: {mcXmin, mcXmax, mcYmin, mcYmax, mcZmin, mcZmax}
 void Prism::getMCBoundingBox(double* xyzLimits) const
 {
-	xyzLimits[0] = 0; // xmin  Give real values!
+	xyzLimits[0] = 0; // xmin
 	xyzLimits[1] = d;  // xmax
 	xyzLimits[2] = 0; // ymin
 	xyzLimits[3] = w; // ymax

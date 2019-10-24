@@ -6,11 +6,13 @@
 #include "ModelView.h"
 #include "ShaderIF.h"
 
+typedef float vec3[3];
+
 class Prism : public ModelView
 {
 public:
 	// As before: you will likely want to add parameters to the constructor
-	Prism(ShaderIF* sIF, cryph::AffPoint _origin, float _w, float _d, float _h);
+	Prism(ShaderIF* sIF, cryph::AffPoint _origin, float _w, float _d, float _h, vec3 _c1, vec3 _c2);
 	virtual ~Prism();
 
 	// xyzLimits: {mcXmin, mcXmax, mcYmin, mcYmax, mcZmin, mcZmax}
@@ -23,8 +25,8 @@ private:
 	GLuint vao[1];
 	GLuint vbo[1];
 
-	vec3 c1;
-	vec3 c2;
+	float c1[3];
+	float c2[3];
 	cryph::AffPoint origin;
 	float w;
   float d;
