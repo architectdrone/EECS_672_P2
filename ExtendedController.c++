@@ -10,12 +10,28 @@ ExtendedController::ExtendedController(const std::string& name, int rcFlags):
 
 void ExtendedController::handleMouseMotion(int x, int y)
 {
-	std::cout << "Implement ExtendedController::handleMouseMotion!\n";
-	// 1. Get a pixel (dx, dy)
-	// 2. update Controller::screenBaseX, Controller::screenBaseY
-	// 3. if translation, map (dx, dy) to (dxInLDS, dyInLDS) and pass to
-	//    ModelView::addToGlobalPan
-	// 4. else if rotation, map (dx, dy) to rotation angles and pass to
-	//    ModelView::addToGlobalRotationDegrees.
-	// 5. do a redraw()
+	float rotation_factor = 30.0;
+
+	int dx = x-screenBaseX;
+	int dy = y-screenBaseY;
+	screenBaseX = x;
+	screenBaseY = y;
+
+	int dimensions[4];
+	glGetIntegerv(GL_VIEWPORT, dimensions);
+
+	if (mouseMotionIsTranslate)
+	{
+		float dx_lds = dx/((dimensions[2]/2))
+		float dy_lds = dy/((dimensions[3]/2))
+		ModelView::addToGlobalPan(dx_lds, dy_lds, 0);
+	}
+	else if (mouseMoutionIsRotate)
+	{
+		float rot_angle_x = dy*(360.0/rotation_factor);
+		float rot_angle_y = dx*(360.0/rotation_factor);
+		ModelView::addToGlobalRotationDegrees(rot_angle_x, rot_angle_y, 0);
+	}
+
+	redraw();
 }
