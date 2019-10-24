@@ -16,7 +16,7 @@ public:
 	// xyzLimits: {mcXmin, mcXmax, mcYmin, mcYmax, mcZmin, mcZmax}
 	void getMCBoundingBox(double* xyzLimitsF) const;
 	void render();
-	void renderXxx();
+	void renderShelf();
 	void defineShelf();
 
 private:

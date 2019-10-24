@@ -49,13 +49,13 @@ void Shelf::render()
 	glUniformMatrix4fv(shaderIF->ppuLoc("mc_ec"), 1, false, mc_ec.extractColMajor(m));
 	glUniformMatrix4fv(shaderIF->ppuLoc("ec_lds"), 1, false, ec_lds.extractColMajor(m));
 
-	renderXxx();
+	renderShelf();
 
 	//Reestablish previous shader program
 	glUseProgram(pgm);
 }
 
-void Shelf::renderXxx()
+void Shelf::renderShelf()
 {
 	// 3. Set GLSL's "ka" and "kd" uniforms using this object's "ka" and "kd"
 	//    instance variables
