@@ -23,20 +23,39 @@ out vec4 fragmentColor;
 
 vec4 evaluateLightingModel()
 {
-	// THIS IS JUST A PLACEHOLDER FOR A LIGHTING MODEL.
-	// It only currently implements simple Lambert shading.
+	vec3 liHat = vec3(0.0, 0.0, 1.0);
 
-	// NOTE: We assume a single directional light source defined in EC (liHat).
-	//
-	// In project 3, several aspects of this will be generalized.
+	vec3 vhat;
+	if (ec_lds[3][3] == 0)
+	{
+		vhat = normalize(0-pvaIn.ecPosition);
+	}
+	else
+	{
+		double dx = (0-ec_lds[0][2])/(ec_lds[0][0]);
+		double dy = (0-ec_lds[1][2])/(ec_lds[1][1]);
+		vhat = normalize(vec3(dx, dy, 1));
+	}
 
-	vec3 liHat = vec3(0.0, 0.0, 1.0); // directional light in EC at eye (a flashlight)
+	bool correctSide = (dot(vhat, pvaIn.ecUnitNormal) > 0);
+	vec3 correct_normal;
+	if (correctSide)
+	{
+		correct_normal = pvaIn.ecUnitNormal;
+	}
+	else
+	{
+		correct_normal = -pvaIn.ecUnitNormal;
+	}
 
-	// Use liHat, the uniforms, and the incoming PVA values to compute
-	// the simplified Phong model we are using for project 2.
+	vec3 I = (ka*La) + (kd*(dot(liHat, correct_normal)));
 
-	// For now:
-	return vec4(0.0, 0.0, 0.0, 1.0);
+	vec4 output;
+	output[0] = I[0];
+	output[1] = I[1];
+	output[2] = I[2];
+	output[3] = 1.0;
+	return output;
 }
 
 void main ()
