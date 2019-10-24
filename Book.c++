@@ -85,7 +85,6 @@ void Book::renderBook()
 {
 	for (int i = 0; i < 4; i++)
 	{
-		printf("%d\n", i);
 		blocks[i]->render();
 	}
 }
