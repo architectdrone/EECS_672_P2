@@ -3,6 +3,7 @@
 #include "ExtendedController.h"
 #include "Shelf.h"
 #include "Block.h"
+#include <algorithm>    // std::max
 
 void createScene(ExtendedController& c, ShaderIF* sIF)
 {
@@ -28,13 +29,14 @@ void set3DViewingInformation(double overallBB[])
 	ModelView::setMCRegionOfInterest(overallBB);
 
 	// MC -> EC:
+	double r = std::max((overallBB[1]-overallBB[0])/2, std::max((overallBB[3]-overallBB[2])/2, (overallBB[5]-overallBB[4])/2));
 
 	// TODO: Compute/set eye, center, up
-	cryph::AffVector eye_offset(10, 10, 10);
-
+	float d = 3*r;
+	cryph::AffVector dir(1, 0, 0);
 
 	cryph::AffPoint center((overallBB[1]-overallBB[0])/2, (overallBB[3]-overallBB[2])/2, (overallBB[5]-overallBB[4])/2);
-	cryph::AffPoint eye = center+eye_offset;
+	cryph::AffPoint eye = center+(d*dir);
 	cryph::AffVector up(0, 0, 1);
 	ModelView::setEyeCenterUp(eye, center, up);
 
@@ -44,13 +46,17 @@ void set3DViewingInformation(double overallBB[])
 	ModelView::setProjection(PERSPECTIVE);
 
 	//Compute/set ecZmin, ecZmax (It is often useful to exaggerate these limits somewhat to prevent unwanted depth clipping.)
-	double ecZmin, ecZmax;
-	ecZmin = -5;
-	ecZmax = -10;
+	double ecZmin, ecZmax, ecXmin, ecXmax, ecYmin, ecYmax, ecZpp, ecProjDir;
+
+	ecXmin = ecYmin = 0-r;
+	ecXmax = ecXmin = r;
+
+	ecZmin = -d-r;
+	ecZmax = -d+r;
 	ModelView::setECZminZmax(ecZmin, ecZmax);
 
 	//Compute/set ecZpp
-	double ecZpp = -1;
+	ecZpp = ecZmax;
 	ModelView::setProjectionPlaneZ(ecZpp);
 }
 
