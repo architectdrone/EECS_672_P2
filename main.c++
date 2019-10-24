@@ -2,19 +2,16 @@
 
 #include "ExtendedController.h"
 #include "Shelf.h"
+#include "Block.h"
 
 void createScene(ExtendedController& c, ShaderIF* sIF)
 {
 	cryph::AffPoint origin(0, 0, 0);
-	float sw = 5;
-	float sd = 1;
-	float sh = 0.1;
-	float pw = 1;
-	float pd = 0.5;
-	float ph = 3;
-	float d  = 3;
+	float l = 5;
+	float d = 1;
+	float h = 1;
 
-	c.addModel(new Shelf(sIF, origin, sw, sd, sh, pw, pd, ph, d));
+	c.addModel(new Shelf(sIF, origin, l, d, h));
 }
 
 void set3DViewingInformation(double overallBB[])

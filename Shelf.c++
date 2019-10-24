@@ -1,49 +1,62 @@
-// TEMPLATE_Subclass.c++
+// Shelf.c++
 
-#include "TEMPLATE_Subclass.h"
+#include "Shelf.h"
 
-TEMPLATE_Subclass::TEMPLATE_Subclass(ShaderIF* sIF) : shaderIF(sIF)
+Shelf::Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float _l, float _d, float _h) : shaderIF(sIF)
 {
-	// DON'T FORGET TO SET INSTANCE VARIABLES, PERHAPS USING
-	// SOME CONSTRUCTOR PARAMETERS
+	xmin = origin.x;
+	xmax = origin.x+_l;
+	ymin = origin.y;
+	ymax = origin.y+_d;
+	zmin = origin.z;
+	zmax = origin.z+_h;
+
+	l = _l;
+	h = _h;
+	d = _d;
+	origin = _origin;
+
+	blocks[0] = new Block(sIF, origin.x, origin.y, origin.z, l, d, h);
 }
 
-TEMPLATE_Subclass::~TEMPLATE_Subclass()
+Shelf::~Shelf()
 {
 }
 
 // xyzLimits: {mcXmin, mcXmax, mcYmin, mcYmax, mcZmin, mcZmax}
-void TEMPLATE_Subclass::getMCBoundingBox(double* xyzLimits) const
+void Shelf::getMCBoundingBox(double* xyzLimits) const
 {
-	xyzLimits[0] = -1000.0; // xmin  Give real values!
-	xyzLimits[1] = 1000.0;  // xmax         |
-	xyzLimits[2] = -1234.5; // ymin         |
-	xyzLimits[3] = -1011.2; // ymax         |
-	xyzLimits[4] = -3000.0; // zmin         |
-	xyzLimits[5] = -2000.0; // zmax        \_/
+	xyzLimits[0] = xmin;
+	xyzLimits[1] = xmax;
+	xyzLimits[2] = ymin;
+	xyzLimits[3] = ymax;
+	xyzLimits[4] = zmin;
+	xyzLimits[5] = zmax;
 }
 
-void TEMPLATE_Subclass::render()
+void Shelf::render()
 {
-	// 1. Save current and establish new current shader program
-	// ...
+	int savedPgm;
+	glGetIntegerv(GL_CURRENT_PROGRAM, &savedPgm);
+	glUseProgram(shaderIF->getShaderPgmID());
 
-	// 2. Establish "mc_ec" and "ec_lds" matrices
-	// ...
+	cryph::Matrix4x4 mc_ec, ec_lds;
+	getMatrices(mc_ec, ec_lds);
+	float m[16];
+	glUniformMatrix4fv(shaderIF->ppuLoc("mc_ec"), 1, false, mc_ec.extractColMajor(m));
+	glUniformMatrix4fv(shaderIF->ppuLoc("ec_lds"), 1, false, mc_ec.extractColMajor(m));
 
-	renderXxx();
+
+	renderShelf();
 
 	// 5. Reestablish previous shader program
 	// ...
 }
 
-void TEMPLATE_Subclass::renderXxx()
+void Shelf::renderShelf()
 {
-	// 3. Set GLSL's "ka" and "kd" uniforms using this object's "ka" and "kd"
-	//    instance variables
-	// ...
-
-	// 4. Establish any other attributes and make one or more calls to
-	//    glDrawArrays and/or glDrawElements
-	// ...
+	for (int i = 0; i < sizeof(blocks); i++)
+	{
+		blocks[i]->render();
+	}
 }
