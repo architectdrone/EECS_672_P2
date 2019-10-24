@@ -16,7 +16,7 @@ Shelf::Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float _sw, float _sd, float
 	kd[0] = 0;
 	kd[1] = 1;
 	kd[2] = 0;
-	
+
 	defineShelf();
 }
 
@@ -61,7 +61,7 @@ void Shelf::renderShelf()
 {
 	//Set GLSL's "ka" and "kd" uniforms using this object's "ka" and "kd" instance variables
 	glBindVertexArray(vao[0]);
-	glUniform3fv(shaderIF->ppuLoc("kd"), 1, kd);
+	//glUniform3fv(shaderIF->ppuLoc("kd"), 1, kd);
 	//glUniform3fv(shaderIF->ppuLoc("ka"), 1, ka);
 
 	//Establish any other attributes and make one or more calls to glDrawArrays and/or glDrawElements
