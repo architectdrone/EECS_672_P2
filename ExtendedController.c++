@@ -22,11 +22,11 @@ void ExtendedController::handleMouseMotion(int x, int y)
 
 	if (mouseMotionIsTranslate)
 	{
-		float dx_lds = dx/((dimensions[2]/2))
-		float dy_lds = dy/((dimensions[3]/2))
+		float dx_lds = dx/((dimensions[2]/2));
+		float dy_lds = dy/((dimensions[3]/2));
 		ModelView::addToGlobalPan(dx_lds, dy_lds, 0);
 	}
-	else if (mouseMoutionIsRotate)
+	else if (mouseMotionIsRotate)
 	{
 		float rot_angle_x = dy*rotation_factor;
 		float rot_angle_y = dx*rotation_factor;
