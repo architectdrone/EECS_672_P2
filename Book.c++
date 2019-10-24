@@ -25,32 +25,28 @@ Book::Book(ShaderIF* sIF, cryph::AffPoint origin, float lx, float ly, float lz, 
 	float r1_lx = cl;
 	float r1_ly = ct;
 	float r1_lz = ch;
-	vec3 r1_color = front_color;
-	blocks[0] = new Block(sIF, r1_origin.x, r1_origin.y, r1_origin.z, r1_lx, r1_ly, r1_lz, r1_color, r1_color);
+	blocks[0] = new Block(sIF, r1_origin.x, r1_origin.y, r1_origin.z, r1_lx, r1_ly, r1_lz, front_color, front_color);
 
 	//Pages
 	cryph::AffPoint r2_origin = origin+cryph::AffPoint((cl-pl)/2, ct, (ch-ph)/2);
 	float r2_lx = pl;
 	float r2_ly = pt;
 	float r2_lz = ph;
-	vec3 r2_color = page_color;
-	blocks[1] = new Block(sIF, r2_origin.x, r2_origin.y, r2_origin.z, r2_lx, r2_ly, r2_lz, r2_color, r2_color);
+	blocks[1] = new Block(sIF, r2_origin.x, r2_origin.y, r2_origin.z, r2_lx, r2_ly, r2_lz, page_color, page_color);
 
 	//Back
-	cryph::AffPoint r2_origin = origin+cryph::AffPoint(0, cl+pl, 0);
+	cryph::AffPoint r3_origin = origin+cryph::AffPoint(0, cl+pl, 0);
 	float r3_lx = cl;
 	float r3_ly = ct;
 	float r3_lz = ch;
-	vec3 r3_color = back_color;
-	blocks[2] = new Block(sIF, r3_origin.x, r3_origin.y, r3_origin.z, r3_lx, r3_ly, r3_lz, r3_color, r3_color);
+	blocks[2] = new Block(sIF, r3_origin.x, r3_origin.y, r3_origin.z, r3_lx, r3_ly, r3_lz, back_color, back_color);
 
 	//Spine
 	cryph::AffPoint r4_origin = origin;
 	float r4_lx = ct;
 	float r4_ly = 2*ct+pt;
 	float r4_lz = ch;
-	vec3 r4_color = spine_color;
-	blocks[3] = new Block(sIF, r4_origin.x, r4_origin.y, r4_origin.z, r4_lx, r4_ly, r4_lz, r4_color, r4_color);
+	blocks[3] = new Block(sIF, r4_origin.x, r4_origin.y, r4_origin.z, r4_lx, r4_ly, r4_lz, spine_color, spine_color);
 }
 
 Book::~Book()
