@@ -15,7 +15,7 @@ MAKE = make
 LINK = g++ -fPIC -g
 LOCAL_UTIL_LIBRARIES = ../lib/libcryph.so ../lib/libfont.so ../lib/libglsl.so ../lib/libImageReader.so ../lib/libmvc.so
 
-OBJS = main.o ExtendedController.o Shelf.o
+OBJS = main.o ExtendedController.o Shelf.o Prism.o Block.o
 
 main: $(OBJS) $(LOCAL_UTIL_LIBRARIES)
 	$(LINK) -o main $(OBJS) $(LOCAL_UTIL_LIBRARIES) $(GL_LIBRARIES)
@@ -41,3 +41,7 @@ ExtendedController.o: ExtendedController.c++
 	$(CPP) $(C_FLAGS) ExtendedController.c++
 Shelf.o: Shelf.h Shelf.c++
 	$(CPP) $(C_FLAGS) Shelf.c++
+Block.o: Block.h Block.c++
+	$(CPP) $(C_FLAGS) Block.c++
+Prism.o: Prism.h Prism.c++
+	$(CPP) $(C_FLAGS) Prism.c++
