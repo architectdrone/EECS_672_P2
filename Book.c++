@@ -35,7 +35,7 @@ Book::Book(ShaderIF* sIF, cryph::AffPoint origin, float lx, float ly, float lz, 
 	blocks[1] = new Block(sIF, r2_origin.x, r2_origin.y, r2_origin.z, r2_lx, r2_ly, r2_lz, page_color, page_color);
 
 	//Back
-	cryph::AffPoint r3_origin = origin+cryph::AffPoint(0, cl+pl, 0);
+	cryph::AffPoint r3_origin = origin+cryph::AffPoint(0, ct+pt, 0);
 	float r3_lx = cl;
 	float r3_ly = ct;
 	float r3_lz = ch;

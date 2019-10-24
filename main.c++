@@ -10,14 +10,14 @@ void createScene(ExtendedController& c, ShaderIF* sIF)
 {
 	//All Units are in Decimal Feet.
 	cryph::AffPoint shelf_origin(0, 0, 0);
-	float l = 1;
-	float d = 5;
-	float h = 0.1;
+	float lx = 5;
+	float ly = 1;
+	float lz = 5;
 	vec3 support_color1 = {0.6, 0.63, .63}; //Steel https://encycolorpedia.com/9aa3a3
 	vec3 support_color2 = {0.38, 0.41, 0.41}; //Sigma Cool Blue https://encycolorpedia.com/616a6a
 	vec3 block_color1 = {0.8, 0.733, 0.61}; //Pale Oak https://encycolorpedia.com/cebb9e
 	vec3 block_color2 = {0.71, 0.6, 0.43}; //Above, but 25% darker https://encycolorpedia.com/b6996e
-	c.addModel(new Book(sIF, shelf_origin, l, d, h, support_color1, support_color2, block_color1, block_color2));
+	c.addModel(new Book(sIF, shelf_origin, lx, ly, lz, support_color1, support_color2, block_color1, block_color2));
 }
 
 void set3DViewingInformation(double overallBB[])
