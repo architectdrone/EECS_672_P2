@@ -6,11 +6,11 @@
 void createScene(ExtendedController& c, ShaderIF* sIF)
 {
 	cryph::AffPoint origin(0, 0, 0);
-	float sw = 1;
-	float sd = 0.1;
-	float sh = 1;
+	float sw = 5;
+	float sd = 1;
+	float sh = 0.1;
 	float pw = 1;
-	float pd = 5;
+	float pd = 0.5;
 	float ph = 3;
 	float d  = 3;
 
@@ -59,7 +59,7 @@ void set3DViewingInformation(double overallBB[])
 
 int main(int argc, char* argv[])
 {
-	ExtendedController c("GIVE ME A NICE TITLE", MVC_USE_DEPTH_BIT);
+	ExtendedController c("NEAT", MVC_USE_DEPTH_BIT);
 	c.reportVersions(std::cout);
 
 	ShaderIF* sIF = new ShaderIF("shaders/basic.vsh", "shaders/phong.fsh");
