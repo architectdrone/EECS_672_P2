@@ -49,8 +49,7 @@ void Shelf::render()
 
 	renderShelf();
 
-	// 5. Reestablish previous shader program
-	// ...
+	glUseProgram(savedPgm);
 }
 
 void Shelf::renderShelf()
