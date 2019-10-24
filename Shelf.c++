@@ -37,16 +37,22 @@ void Shelf::getMCBoundingBox(double* xyzLimits) const
 
 void Shelf::render()
 {
-	// 1. Save current and establish new current shader program
-	// ...
+	//Save current and establish new current shader program
+	GLint pgm;
+	glGetIntegerv(GL_CURRENT_PROGRAM, &pgm);
+	glUseProgram(shaderIF->getShaderPgmID());
 
-	// 2. Establish "mc_ec" and "ec_lds" matrices
-	// ...
+	//Establish "mc_ec" and "ec_lds" matrices
+	cryph::Matrix4x4 mc_ec, ec_lds;
+	ModelView::getMatrices(mc_ec, ec_lds);
+	float m[16];
+	glUniformMatrix4fv(shaderIF->ppuLoc("mc_ec"), 1, false, mc_ec.extractColMajor(m));
+	glUniformMatrix4fv(shaderIF->ppuLoc("ec_lds"), 1, false, ec_lds.extractColMajor(m));
 
 	renderXxx();
 
-	// 5. Reestablish previous shader program
-	// ...
+	//Reestablish previous shader program
+	glUseProgram(pgm);
 }
 
 void Shelf::renderXxx()
