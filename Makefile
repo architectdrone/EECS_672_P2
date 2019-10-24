@@ -43,5 +43,5 @@ Shelf.o: Shelf.h Shelf.c++
 	$(CPP) $(C_FLAGS) Shelf.c++
 Block.o: Block.h Block.c++
 	$(CPP) $(C_FLAGS) Block.c++
-Block.o: Prism.h Prism.c++
+Prism.o: Prism.h Prism.c++
 	$(CPP) $(C_FLAGS) Prism.c++

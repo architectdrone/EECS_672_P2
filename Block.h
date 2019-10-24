@@ -12,11 +12,13 @@
 #include "ModelView.h"
 #include "ShaderIF.h"
 
+typedef float vec3[3];
+
 class Block : public ModelView
 {
 public:
 	Block(ShaderIF* sIF, float cx, float cy, float cz, // lower left corner
-	      float lx, float ly, float lz);// lengths in 3 directions
+	      float lx, float ly, float lz, vec3 _color1, vec3 _color2);// lengths in 3 directions
 	virtual ~Block();
 
 	// xyzLimits: {mcXmin, mcXmax, mcYmin, mcYmax, mcZmin, mcZmax}

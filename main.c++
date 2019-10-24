@@ -12,7 +12,7 @@ void createScene(ExtendedController& c, ShaderIF* sIF)
 	float d = 1;
 	float h = 1;
 
-	c.addModel(new Shelf(sIF, origin, l, d, h));
+	c.addModel(new Shelf(sIF, origin, l, d, h, 0.1));
 }
 
 void set3DViewingInformation(double overallBB[])

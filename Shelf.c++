@@ -2,21 +2,34 @@
 
 #include "Shelf.h"
 
-Shelf::Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float _l, float _d, float _h) : shaderIF(sIF)
+Shelf::Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float lx, float ly, float lz, float support_thickness) : shaderIF(sIF)
 {
 	xmin = origin.x;
-	xmax = origin.x+_l;
+	xmax = origin.x+lx;
 	ymin = origin.y;
-	ymax = origin.y+_d;
+	ymax = origin.y+ly;
 	zmin = origin.z;
-	zmax = origin.z+_h;
+	zmax = origin.z+lz;
 
-	l = _l;
-	h = _h;
-	d = _d;
+	l = lx;
+	h = ly;
+	d = lz;
 	origin = _origin;
 
-	blocks[0] = new Block(sIF, origin.x, origin.y, origin.z, l, d, h);
+	vec3 support_color1 = {0.0, 0.1, 0.0};
+	vec3 support_color2 = {0.0, 0.0, 0.1};
+	vec3 block_color1 = {1.0, 0.0, 0.0};
+	vec3 block_color2 = {0.0, 0.0, 0.0};
+
+	float support_lz = lx;
+	float support_lx = lx;
+	float support_ly = support_thickness;
+	cryph::AffPoint support1_origin = origin;
+	cryph::AffPoint support2_origin = origin+cryph::AffPoint(0, ly-support_thickness, 0);
+
+	blocks[0] = new Block(sIF, origin.x, origin.y, origin.z, lx, ly, lz, block_color1, block_color2);
+	prisms[1] = new Prism(sIF, support1_origin, support_lx, support_ly, support_lz, support_color1, support_color2);
+	prisms[2] = new Prism(sIF, support2_origin, support_lx, support_ly, support_lz, support_color1, support_color2);
 }
 
 Shelf::~Shelf()
