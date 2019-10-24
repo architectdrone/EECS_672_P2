@@ -57,15 +57,12 @@ void Shelf::render()
 
 void Shelf::renderShelf()
 {
-	// 3. Set GLSL's "ka" and "kd" uniforms using this object's "ka" and "kd"
-	//    instance variables
+	// 3. Set GLSL's "ka" and "kd" uniforms using this object's "ka" and "kd" instance variables
 	glBindVertexArray(vao[0]);
 	glUniform3fv(shaderIF->ppuLoc("kd"), 1, kd);
 	glUniform3fv(shaderIF->ppuLoc("ka"), 1, ka);
 
-	// 4. Establish any other attributes and make one or more calls to
-	//    glDrawArrays and/or glDrawElements
-	// ...
+	//Establish any other attributes and make one or more calls to glDrawArrays and/or glDrawElements
 	for (int i = 0; i < 16; i++)
 	{
 			float normal_x = normal[i].dx;
