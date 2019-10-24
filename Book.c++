@@ -2,31 +2,55 @@
 
 #include "Book.h"
 
-Book::Book(ShaderIF* sIF, cryph::AffPoint _origin, float lx, float ly, float lz, float support_thickness, vec3 support_color1, vec3 support_color2, vec3 block_color1, vec3 block_color2) : shaderIF(sIF)
+Book::Book(ShaderIF* sIF, cryph::AffPoint origin, float lx, float ly, float lz, vec3 front_color, vec3 page_color, vec3 back_color, vec3 spine_color) : shaderIF(sIF)
 {
-
-
-	l = lx;
-	h = ly;
-	d = lz;
-	origin = _origin;
-
-	float support_lz = lx;
-	float support_lx = lx;
-	float support_ly = support_thickness;
-	cryph::AffPoint support1_origin = origin;
-	cryph::AffPoint support2_origin = origin+cryph::AffPoint(0, ly-support_thickness, 0);
-
 	xmin = origin.x;
 	xmax = origin.x+lx;
 	ymin = origin.y;
 	ymax = origin.y+ly;
-	zmin = origin.z-support_lz;
+	zmin = origin.z;
 	zmax = origin.z+lz;
 
-	blocks[0] = new Block(sIF, origin.x, origin.y, origin.z, lx, ly, lz, block_color1, block_color2);
-	prisms[0] = new Prism(sIF, support1_origin, support_lx, support_ly, support_lz, support_color1, support_color2);
-	prisms[1] = new Prism(sIF, support2_origin, support_lx, support_ly, support_lz, support_color1, support_color2);
+	float cover_thickness_ratio = 0.2; //Percent of the size in the y direction that is cover.
+	float paper_size_ratio = 0.8; //Percentage of the cover that is the size of page
+	float ct = (cover_thickness_ratio/2) * ly;
+	float cl = lx;
+	float ch = ly;
+	float pt = (1-cover_thickness_ratio)*ly;
+	float pl = paper_size_ratio *lx;
+	float ph = paper_size_ratio *ly;
+
+	//Front
+	cryph::AffPoint r1_origin = origin;
+	float r1_lx = cl;
+	float r1_ly = ct;
+	float r1_lz = ch;
+	vec3 r1_color = front_color;
+	blocks[0] = new Block(sIF, r1_origin.x, r1_origin.y, r1_origin.z, r1_lx, r1_ly, r1_lz, r1_color, r1_color);
+
+	//Pages
+	cryph::AffPoint r2_origin = origin+cryph::AffPoint((cl-pl)/2, ct, (ch-ph)/2);
+	float r2_lx = pl;
+	float r2_ly = pt;
+	float r2_lz = ph;
+	vec3 r2_color = page_color;
+	blocks[1] = new Block(sIF, r2_origin.x, r2_origin.y, r2_origin.z, r2_lx, r2_ly, r2_lz, r2_color, r2_color);
+
+	//Back
+	cryph::AffPoint r2_origin = origin+cryph::AffPoint(0, cl+pl, 0);
+	float r3_lx = cl;
+	float r3_ly = ct;
+	float r3_lz = ch;
+	vec3 r3_color = back_color;
+	blocks[2] = new Block(sIF, r3_origin.x, r3_origin.y, r3_origin.z, r3_lx, r3_ly, r3_lz, r3_color, r3_color);
+
+	//Spine
+	cryph::AffPoint r4_origin = origin;
+	float r4_lx = ct;
+	float r4_ly = 2*ct+pt;
+	float r4_lz = ch;
+	vec3 r4_color = spine_color;
+	blocks[3] = new Block(sIF, r4_origin.x, r4_origin.y, r4_origin.z, r4_lx, r4_ly, r4_lz, r4_color, r4_color);
 }
 
 Book::~Book()
@@ -63,13 +87,8 @@ void Book::render()
 
 void Book::renderBook()
 {
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < sizeof(blocks); i++)
 	{
 		blocks[i]->render();
-
-	}
-	for (int x = 0; x < 2; x++)
-	{
-		prisms[x]->render();
 	}
 }
