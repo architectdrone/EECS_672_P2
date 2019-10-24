@@ -5,7 +5,7 @@
 
 typedef float vec3[3];
 
-Prism::Prism(ShaderIF* sIF, cryph::AffPoint _origin, float _w, float _d, float _h, vec3 _c1, vec3 _c2) : shaderIF(sIF)
+Prism::Prism(ShaderIF* sIF, cryph::AffPoint _origin, float lx, float ly, float lz, vec3 _c1, vec3 _c2) : shaderIF(sIF)
 {
 	/*
 	c1 is the color of the rectangular faces.
@@ -16,9 +16,9 @@ Prism::Prism(ShaderIF* sIF, cryph::AffPoint _origin, float _w, float _d, float _
 	*/
 
 	origin = _origin;
-	w = _w;
-	d = _d;
-	h = _h;
+	w = lx;
+	d = ly;
+	h = lz;
 	c1[0] = _c1[0];
 	c1[1] = _c1[1];
 	c1[2] = _c1[2];

@@ -30,6 +30,8 @@ private:
 	GLuint vbo[1];
 	GLuint ebo[3];
 
+	float color1[3];
+	float color2[3];
 	// "float" here to match the need to send float to VBO.
 	float xmin, xmax, ymin, ymax, zmin, zmax;
 	float kd[3];

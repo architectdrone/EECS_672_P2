@@ -14,14 +14,19 @@ GLuint Block::indexList[3][4] = {
 	{ 1, 7, 3, 5 }  // ymax face
 };
 
-Block::Block(ShaderIF* sIF, float cx, float cy, float cz, float lx, float ly, float lz) :
+Block::Block(ShaderIF* sIF, float cx, float cy, float cz, float lx, float ly, float lz, vec3 _color1, vec3 _color2) :
 	shaderIF(sIF)
 {
 	xmin = cx; xmax = cx + lx;
 	ymin = cy; ymax = cy + ly;
 	zmin = cz; zmax = cz + lz;
+	color1[0] = _color1[0];
+	color1[1] = _color1[1];
+	color1[2] = _color1[2];
+	color2[0] = _color2[0];
+	color2[1] = _color2[1];
+	color2[2] = _color2[2];
 
-	kd[0] = 0.7; kd[1] = 0.7; kd[2] = 0.0;
 	defineBlock();
 }
 
@@ -79,25 +84,33 @@ bool Block::handleCommand(unsigned char anASCIIChar, double ldsX, double ldsY)
 void Block::renderBlock()
 {
 	glBindVertexArray(vao[0]);
-	glUniform3fv(shaderIF->ppuLoc("kd"), 1, kd);
+
 
 	// The three faces that can be drawn with glDrawArrays
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, color2);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, 0.0, 1.0);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, color1);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 1.0, 0.0, 0.0);
 	glDrawArrays(GL_TRIANGLE_STRIP, 2, 4);
+
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, color2);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, 0.0, -1.0);
 	glDrawArrays(GL_TRIANGLE_STRIP, 4, 4);
 
 	// The three faces that are drawn with glDrawElements
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, color1);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), -1.0, 0.0, 0.0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo[0]);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, nullptr);
 
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, color1);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, -1.0, 0.0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo[1]);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, nullptr);
 
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, color1);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, 1.0, 0.0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo[2]);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, nullptr);
