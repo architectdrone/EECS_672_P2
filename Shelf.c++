@@ -12,12 +12,16 @@ Shelf::Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float _sw, float _sd, float
 	pd = _pd;
 	ph = _ph;
 	d  = d;
+
+	defineShelf();
 	// DON'T FORGET TO SET INSTANCE VARIABLES, PERHAPS USING
 	// SOME CONSTRUCTOR PARAMETERS
 }
 
 Shelf::~Shelf()
 {
+	glDeleteBuffers(1, vbo);
+	glDeleteVertexArrays(1, vao);
 }
 
 // xyzLimits: {mcXmin, mcXmax, mcYmin, mcYmax, mcZmin, mcZmax}
