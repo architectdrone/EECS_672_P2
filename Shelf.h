@@ -10,7 +10,7 @@ class Shelf : public ModelView
 {
 public:
 	// As before: you will likely want to add parameters to the constructor
-	Shelf(ShaderIF* sIF);
+	Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float _sw, float _sd, float _sh, float _pw, float _pd, float _ph, float _d);
 	virtual ~Shelf();
 
 	// xyzLimits: {mcXmin, mcXmax, mcYmin, mcYmax, mcZmin, mcZmax}

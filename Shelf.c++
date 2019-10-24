@@ -2,8 +2,16 @@
 
 #include "Shelf.h"
 
-Shelf::Shelf(ShaderIF* sIF) : shaderIF(sIF)
+Shelf::Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float _sw, float _sd, float _sh, float _pw, float _pd, float _ph, float _d) : shaderIF(sIF)
 {
+	origin = _origin;
+	sw = _sw;
+	sd = _sd;
+	sh = _sh;
+	pw = _pw;
+	pd = _pd;
+	ph = _ph;
+	d  = d;
 	// DON'T FORGET TO SET INSTANCE VARIABLES, PERHAPS USING
 	// SOME CONSTRUCTOR PARAMETERS
 }
@@ -15,12 +23,12 @@ Shelf::~Shelf()
 // xyzLimits: {mcXmin, mcXmax, mcYmin, mcYmax, mcZmin, mcZmax}
 void Shelf::getMCBoundingBox(double* xyzLimits) const
 {
-	xyzLimits[0] = 0; // xmin  Give real values!
-	xyzLimits[1] = sw;  // xmax         |
-	xyzLimits[2] = 0; // ymin         |
-	xyzLimits[3] = sd; // ymax         |
-	xyzLimits[4] = 0-ph; // zmin         |
-	xyzLimits[5] = sh; // zmax        \_/
+	xyzLimits[0] = 0; // xmin
+	xyzLimits[1] = sw;  // xmax
+	xyzLimits[2] = 0; // ymin
+	xyzLimits[3] = sd; // ymax
+	xyzLimits[4] = 0-ph; // zmin
+	xyzLimits[5] = sh; // zmax
 }
 
 void Shelf::render()
