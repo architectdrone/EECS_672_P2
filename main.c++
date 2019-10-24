@@ -8,12 +8,14 @@
 void createScene(ExtendedController& c, ShaderIF* sIF)
 {
 	cryph::AffPoint origin(0, 0, 0);
-	float l = 5;
-	float d = 1;
-	float h = 1;
-	vec3 c1 = {0.0, 0.5, 0.0};
-	vec3 c2 = {0.0, 0.9, 0.0};
-	c.addModel(new Prism(sIF,origin, l, d, h, c1, c2));
+	float l = 1;
+	float d = 5;
+	float h = 0.1;
+	vec3 support_color1 = {0.0, 1, 0.0};
+	vec3 support_color2 = {0.0, 0.0, 1};
+	vec3 block_color1 = {1.0, 0.0, 0.0};
+	vec3 block_color2 = {0.0, 1.0, 0.0};
+	c.addModel(new Shelf(sIF, origin, l, d, h, 0.1, support_color1, support_color2, block_color1, block_color2));
 }
 
 void set3DViewingInformation(double overallBB[])

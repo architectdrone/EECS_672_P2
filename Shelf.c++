@@ -2,24 +2,14 @@
 
 #include "Shelf.h"
 
-Shelf::Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float lx, float ly, float lz, float support_thickness) : shaderIF(sIF)
+Shelf::Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float lx, float ly, float lz, float support_thickness, vec3 support_color1, vec3 support_color2, vec3 block_color1, vec3 block_color2) : shaderIF(sIF)
 {
-	xmin = origin.x;
-	xmax = origin.x+lx;
-	ymin = origin.y;
-	ymax = origin.y+ly;
-	zmin = origin.z;
-	zmax = origin.z+lz;
+
 
 	l = lx;
 	h = ly;
 	d = lz;
 	origin = _origin;
-
-	vec3 support_color1 = {0.0, 0.1, 0.0};
-	vec3 support_color2 = {0.0, 0.0, 0.1};
-	vec3 block_color1 = {1.0, 0.0, 0.0};
-	vec3 block_color2 = {0.0, 0.0, 0.0};
 
 	float support_lz = lx;
 	float support_lx = lx;
@@ -27,9 +17,16 @@ Shelf::Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float lx, float ly, float l
 	cryph::AffPoint support1_origin = origin;
 	cryph::AffPoint support2_origin = origin+cryph::AffPoint(0, ly-support_thickness, 0);
 
+	xmin = origin.x;
+	xmax = origin.x+lx;
+	ymin = origin.y;
+	ymax = origin.y+ly;
+	zmin = origin.z-support_lz;
+	zmax = origin.z+lz;
+
 	blocks[0] = new Block(sIF, origin.x, origin.y, origin.z, lx, ly, lz, block_color1, block_color2);
-	prisms[1] = new Prism(sIF, support1_origin, support_lx, support_ly, support_lz, support_color1, support_color2);
-	prisms[2] = new Prism(sIF, support2_origin, support_lx, support_ly, support_lz, support_color1, support_color2);
+	prisms[0] = new Prism(sIF, support1_origin, support_lx, support_ly, support_lz, support_color1, support_color2);
+	prisms[1] = new Prism(sIF, support2_origin, support_lx, support_ly, support_lz, support_color1, support_color2);
 }
 
 Shelf::~Shelf()
@@ -66,15 +63,13 @@ void Shelf::render()
 
 void Shelf::renderShelf()
 {
-	printf("JESYUS");
 	for (int i = 0; i < 1; i++)
 	{
 		blocks[i]->render();
-		printf("YOU");
+
 	}
-	for (int i = 0; i < 2; i++)
+	for (int x = 0; x < 2; x++)
 	{
-		prisms[i]->render();
+		prisms[x]->render();
 	}
-	printf("HEY");
 }

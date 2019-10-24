@@ -95,7 +95,7 @@ void Prism::definePrism()
 
 void Prism::renderPrism()
 {
-	glBindVertexArray(vao[0]);
+
 
 	GLuint verts0[4] = {0,1,2,3};
 	GLuint verts1[3] = {0,1,4};
@@ -103,22 +103,27 @@ void Prism::renderPrism()
 	GLuint verts3[4] = {0,2,4,5};
 	GLuint verts4[4] = {1,3,4,5};
 
+	glBindVertexArray(vao[0]);
 	glUniform3fv(shaderIF->ppuLoc("kd"), 1, c1);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, 0.0, 1.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, verts0);
 
+	glBindVertexArray(vao[0]);
 	glUniform3fv(shaderIF->ppuLoc("kd"), 1, c2);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, -1.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 3, GL_UNSIGNED_INT, verts1);
 
+	glBindVertexArray(vao[0]);
 	glUniform3fv(shaderIF->ppuLoc("kd"), 1, c2);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, 1.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 3, GL_UNSIGNED_INT, verts2);
 
+	glBindVertexArray(vao[0]);
 	glUniform3fv(shaderIF->ppuLoc("kd"), 1, c1);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), -1.0, 0.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, verts3);
 
+	glBindVertexArray(vao[0]);
 	glUniform3fv(shaderIF->ppuLoc("kd"), 1, c1);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), (0-h)/sqrt((h*h)+(w*w)), 0.0, (0-w)/sqrt((h*h)+(w*w)));
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, verts4);

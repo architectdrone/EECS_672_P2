@@ -7,12 +7,13 @@
 #include "ShaderIF.h"
 #include "Block.h"
 #include "Prism.h"
+typedef float vec3[3];
 
 class Shelf : public ModelView
 {
 public:
 	// As before: you will likely want to add parameters to the constructor
-	Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float _l, float _d, float _h, float support_thickness);
+	Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float lx, float ly, float lz, float support_thickness, vec3 support_color1, vec3 support_color2, vec3 block_color1, vec3 block_color2);
 	virtual ~Shelf();
 
 	// xyzLimits: {mcXmin, mcXmax, mcYmin, mcYmax, mcZmin, mcZmax}
