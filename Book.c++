@@ -12,13 +12,13 @@ Book::Book(ShaderIF* sIF, cryph::AffPoint origin, float lx, float ly, float lz, 
 	zmax = origin.z+lz;
 
 	float cover_thickness_ratio = 0.2; //Percent of the size in the y direction that is cover.
-	float paper_size_ratio = 0.8; //Percentage of the cover that is the size of page
+	float paper_size_ratio = 0.9; //Percentage of the cover that is the size of page
 	float ct = (cover_thickness_ratio/2) * ly;
 	float cl = lx;
-	float ch = ly;
+	float ch = lz;
 	float pt = (1-cover_thickness_ratio)*ly;
-	float pl = paper_size_ratio *lx;
-	float ph = paper_size_ratio *ly;
+	float pl = paper_size_ratio *cl;
+	float ph = paper_size_ratio *ch;
 
 	//Front
 	cryph::AffPoint r1_origin = origin;

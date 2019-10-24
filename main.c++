@@ -8,11 +8,11 @@
 
 void createScene(ExtendedController& c, ShaderIF* sIF)
 {
-	//All Units are in Decimal Feet.
+	//All Units are in inches.
 	cryph::AffPoint shelf_origin(0, 0, 0);
-	float lx = 5;
-	float ly = 1;
-	float lz = 5;
+	float lx = 5.5;
+	float ly = 1.5;
+	float lz = 8;
 	vec3 support_color1 = {0.6, 0.63, .63}; //Steel https://encycolorpedia.com/9aa3a3
 	vec3 support_color2 = {0.38, 0.41, 0.41}; //Sigma Cool Blue https://encycolorpedia.com/616a6a
 	vec3 block_color1 = {0.8, 0.733, 0.61}; //Pale Oak https://encycolorpedia.com/cebb9e
