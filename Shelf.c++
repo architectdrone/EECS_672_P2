@@ -59,11 +59,36 @@ void Shelf::renderShelf()
 {
 	// 3. Set GLSL's "ka" and "kd" uniforms using this object's "ka" and "kd"
 	//    instance variables
-	// ...
+	glBindVertexArray(vao[0]);
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, kd);
+	glUniform3fv(shaderIF->ppuLoc("ka"), 1, ka);
 
 	// 4. Establish any other attributes and make one or more calls to
 	//    glDrawArrays and/or glDrawElements
 	// ...
+	for (int i = 0; i < 16; i++)
+	{
+			float normal_x = normal[i].dx;
+			float normal_y = normal[i].dy;
+			float normal_z = normal[i].dz;
+
+			GLuint i0 = faces[i][0];
+			GLuint i1 = faces[i][1];
+			GLuint i2 = faces[i][2];
+			GLuint i3;
+			if (faces[i][3] != -1)
+			{
+				i3 = faces[i][3];
+			}
+			else
+			{
+				i3 = i0;
+			}
+			GLuint indices[4] = {i0, i1, i2, i3};
+
+			glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), normal_x, normal_y, normal_z);
+			glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, indices);
+	}
 }
 
 void Shelf::defineShelf()
