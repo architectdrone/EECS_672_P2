@@ -22,7 +22,9 @@ private:
 	ShaderIF* sIF;
 	GLuint vao[1];
 	GLuint vbo[1];
-	
+
+	vec3 c1;
+	vec3 c2;
 	cryph::AffPoint origin;
 	float w;
   float d;

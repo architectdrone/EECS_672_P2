@@ -5,12 +5,22 @@
 
 typedef float vec3[3];
 
-Prism::Prism(ShaderIF* sIF, cryph::AffPoint _origin, float _w, float _d, float _h) : shaderIF(sIF)
+Prism::Prism(ShaderIF* sIF, cryph::AffPoint _origin, float _w, float _d, float _h, vec3 _c1, vec3 _c2,) : shaderIF(sIF)
 {
+	/*
+	c1 is the color of the rectangular faces.
+	c2 is the color of the triangular faces.
+	w is length in the x direction.
+	d is length in the y direction.
+	h is length in the z direction.
+	*/
+
 	origin = _origin;
 	w = _w;
 	d = _d;
 	h = _h;
+	c1 = _c1;
+	c2 = _c2;
 	kd[0] = 0.0; kd[1] = 1.0; kd[2] = 0.0;
 	definePrism();
 }
@@ -82,7 +92,6 @@ void Prism::definePrism()
 void Prism::renderPrism()
 {
 	glBindVertexArray(vao[0]);
-	glUniform3fv(shaderIF->ppuLoc("kd"), 1, kd);
 
 	GLuint verts0[4] = {0,1,2,3};
 	GLuint verts1[3] = {0,1,4};
@@ -90,14 +99,23 @@ void Prism::renderPrism()
 	GLuint verts3[4] = {0,2,4,5};
 	GLuint verts4[4] = {1,3,4,5};
 
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, c1);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, 0.0, 1.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, verts0);
+
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, c2);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, -1.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 3, GL_UNSIGNED_INT, verts1);
+
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, c2);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, 1.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 3, GL_UNSIGNED_INT, verts2);
+
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, c1);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), -1.0, 0.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, verts3);
+
+	glUniform3fv(shaderIF->ppuLoc("kd"), 1, c1);
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), (0-h)/sqrt((h*h)+(w*w)), 0.0, (0-w)/sqrt((h*h)+(w*w)));
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, verts4);
 }
