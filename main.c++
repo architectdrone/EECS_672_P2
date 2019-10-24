@@ -1,11 +1,20 @@
 // main.c++: Starter for EECS 672 Projects 2-4
 
 #include "ExtendedController.h"
-#include "TEMPLATE_Subclass.h"
+#include "Shelf.h"
 
 void createScene(ExtendedController& c, ShaderIF* sIF)
 {
-	// TODO: Implement this function
+	cryph::AffPoint origin(0, 0, 0);
+	float sw = 1;
+	float sd = 0.1;
+	float sh = 1;
+	float pw = 1;
+	float pd = 5;
+	float ph = 3;
+	float d  = 3;
+
+	c.addModel(new Shelf(sIF, origin, sw, sd, sh, pw, pd, ph, d));
 }
 
 void set3DViewingInformation(double overallBB[])
@@ -19,11 +28,17 @@ void set3DViewingInformation(double overallBB[])
 	//   ModelView::setMCRegionOfInterest(modified_overallBB);
 	//   Tell the ModelView class that dynamic rotations are to be done about the eye.
 
+	ModelView::setMCRegionOfInterest(overallBB);
+
 	// MC -> EC:
 
 	// TODO: Compute/set eye, center, up
-	cryph::AffPoint eye, center;
-	cryph::AffVector up;
+	cryph::AffVector eye_offset(10, 10, 10);
+
+
+	cryph::AffPoint center((overallBB[1]-overallBB[0])/2, (overallBB[3]-overallBB[2])/2, (overallBB[5]-overallBB[4])/2);
+	cryph::AffPoint eye = center+eye_offset;
+	cryph::AffVector up(0, 0, 1);
 	ModelView::setEyeCenterUp(eye, center, up);
 
 	// EC -> LDS:
@@ -31,13 +46,14 @@ void set3DViewingInformation(double overallBB[])
 	// Specify the initial projection type desired
 	ModelView::setProjection(PERSPECTIVE);
 
-	// TODO: Compute/set ecZmin, ecZmax (It is often useful to exaggerate
-	//       these limits somewhat to prevent unwanted depth clipping.)
+	//Compute/set ecZmin, ecZmax (It is often useful to exaggerate these limits somewhat to prevent unwanted depth clipping.)
 	double ecZmin, ecZmax;
+	ecZmin = -5;
+	ecZmax = -10;
 	ModelView::setECZminZmax(ecZmin, ecZmax);
 
-	// TODO: Compute/set ecZpp
-	double ecZpp;
+	//Compute/set ecZpp
+	double ecZpp = -1;
 	ModelView::setProjectionPlaneZ(ecZpp);
 }
 

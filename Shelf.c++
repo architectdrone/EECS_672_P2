@@ -14,8 +14,6 @@ Shelf::Shelf(ShaderIF* sIF, cryph::AffPoint _origin, float _sw, float _sd, float
 	d  = d;
 
 	defineShelf();
-	// DON'T FORGET TO SET INSTANCE VARIABLES, PERHAPS USING
-	// SOME CONSTRUCTOR PARAMETERS
 }
 
 Shelf::~Shelf()
@@ -57,7 +55,7 @@ void Shelf::render()
 
 void Shelf::renderShelf()
 {
-	// 3. Set GLSL's "ka" and "kd" uniforms using this object's "ka" and "kd" instance variables
+	//Set GLSL's "ka" and "kd" uniforms using this object's "ka" and "kd" instance variables
 	glBindVertexArray(vao[0]);
 	glUniform3fv(shaderIF->ppuLoc("kd"), 1, kd);
 	glUniform3fv(shaderIF->ppuLoc("ka"), 1, ka);
