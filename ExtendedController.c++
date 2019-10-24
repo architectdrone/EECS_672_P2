@@ -10,7 +10,7 @@ ExtendedController::ExtendedController(const std::string& name, int rcFlags):
 
 void ExtendedController::handleMouseMotion(int x, int y)
 {
-	float rotation_factor = 30.0;
+	float rotation_factor = .20;
 
 	int dx = x-screenBaseX;
 	int dy = y-screenBaseY;
@@ -28,8 +28,8 @@ void ExtendedController::handleMouseMotion(int x, int y)
 	}
 	else if (mouseMoutionIsRotate)
 	{
-		float rot_angle_x = dy*(360.0/rotation_factor);
-		float rot_angle_y = dx*(360.0/rotation_factor);
+		float rot_angle_x = dy*rotation_factor;
+		float rot_angle_y = dx*rotation_factor;
 		ModelView::addToGlobalRotationDegrees(rot_angle_x, rot_angle_y, 0);
 	}
 
