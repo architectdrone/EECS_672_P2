@@ -46,7 +46,6 @@ void Shelf::render()
 	glUniformMatrix4fv(shaderIF->ppuLoc("mc_ec"), 1, false, mc_ec.extractColMajor(m));
 	glUniformMatrix4fv(shaderIF->ppuLoc("ec_lds"), 1, false, mc_ec.extractColMajor(m));
 
-
 	renderShelf();
 
 	glUseProgram(savedPgm);

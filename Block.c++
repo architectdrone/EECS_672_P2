@@ -99,7 +99,7 @@ void Block::renderBlock()
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, nullptr);
 
 	glVertexAttrib3f(shaderIF->pvaLoc("mcNormal"), 0.0, 1.0, 0.0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo[1]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo[2]);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, nullptr);
 }
 

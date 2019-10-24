@@ -77,7 +77,6 @@ int main(int argc, char* argv[])
 	std::cout << "              " << xyz[2] << " <= y <= " << xyz[3] << '\n';
 	std::cout << "              " << xyz[4] << " <= z <= " << xyz[5] << "\n\n";
 	set3DViewingInformation(xyz);
-
 	c.run();
 
 	delete sIF;
