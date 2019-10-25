@@ -69,6 +69,11 @@ void createScene(ExtendedController& c, ShaderIF* sIF)
 	float book_lx = 5.5;
 	float book_ly = 1.5;
 	float book_lz = 8;
+	for (int i = 0; i < 2; i++)
+	{
+		fillShelf(c, sIF, shelf_origin);
+		shelf_origin = shelf_origin + cryph::AffVector(0, 0, 12);
+	}
 	fillShelf(c, sIF, shelf_origin);
 	//c.addModel(new Book(sIF, shelf_origin, book_lx, book_ly, book_lz, support_color1, support_color2, block_color1, block_color2));
 }
