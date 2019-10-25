@@ -58,7 +58,7 @@ void fillShelf(ExtendedController& c, ShaderIF* sIF, cryph::AffPoint shelf_origi
 	vec3 support_color2 = {0.38, 0.41, 0.41}; //Sigma Cool Blue https://encycolorpedia.com/616a6a
 	vec3 block_color1 = {0.8, 0.733, 0.61}; //Pale Oak https://encycolorpedia.com/cebb9e
 	vec3 block_color2 = {0.71, 0.6, 0.43}; //Above, but 25% darker https://encycolorpedia.com/b6996e
-	c.addModel(new Shelf(sIF, shelf_origin, shelf_lx, shelf_ly, shelf_lz, 0.4, mutateColor(support_color1, 0.1), mutateColor(support_color2, 0.1), mutateColor(block_color1, 0.1), mutateColor(block_color2,0.1) ));
+	c.addModel(new Shelf(sIF, shelf_origin, shelf_lx, shelf_ly, shelf_lz, 1, mutateColor(support_color1, 0.1), mutateColor(support_color2, 0.1), mutateColor(block_color1, 0.1), mutateColor(block_color2,0.1) ));
 
 	//Books
 	cryph::AffPoint next_book_origin = shelf_origin;
@@ -76,7 +76,7 @@ void fillShelf(ExtendedController& c, ShaderIF* sIF, cryph::AffPoint shelf_origi
 	float cup_lx = mutateNumber(1, 0.5);
 	float cup_ly = mutateNumber(1, 0.5);
 	float cup_lz = mutateNumber(1, 0.5);
-	c.addModel(new Book(sIF, cup_origin, cup_lx, cup_ly, cup_lz, randomColor(), randomColor(), randomColor(), randomColor()));
+	c.addModel(new Cup(sIF, cup_origin, cup_lx, cup_ly, cup_lz, randomColor(), randomColor(), randomColor(), randomColor()));
 
 
 }
