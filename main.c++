@@ -3,6 +3,7 @@
 #include "ExtendedController.h"
 #include "Shelf.h"
 #include "Book.h"
+#include "Cup.h"
 #include "Block.h"
 #include <algorithm>    // std::max
 #include <stdlib.h>     /* srand, rand */
@@ -41,24 +42,24 @@ void fillShelf(ExtendedController& c, ShaderIF* sIF, cryph::AffPoint shelf_origi
 	//Shelf
 	float shelf_lx = 7;
 	float shelf_ly = 24;
-	float shelf_lz = 1;
+	float shelf_lz = 10;
 	vec3 support_color1 = {0.6, 0.63, .63}; //Steel https://encycolorpedia.com/9aa3a3
 	vec3 support_color2 = {0.38, 0.41, 0.41}; //Sigma Cool Blue https://encycolorpedia.com/616a6a
 	vec3 block_color1 = {0.8, 0.733, 0.61}; //Pale Oak https://encycolorpedia.com/cebb9e
 	vec3 block_color2 = {0.71, 0.6, 0.43}; //Above, but 25% darker https://encycolorpedia.com/b6996e
-	c.addModel(new Shelf(sIF, shelf_origin, shelf_lx, shelf_ly, shelf_lz, 0.4, mutateColor(support_color1, 0.1), mutateColor(support_color2, 0.1), mutateColor(block_color1, 0.1), mutateColor(block_color2,0.1) ));
+	c.addModel(new Cup(sIF, shelf_origin, shelf_lx, shelf_ly, shelf_lz, mutateColor(support_color1, 0.1), mutateColor(support_color2, 0.1), mutateColor(block_color1, 0.1), mutateColor(block_color2,0.1) ));
 
-	//Books
-	cryph::AffPoint next_book_origin = shelf_origin;
-	for (int i = 0; i < (rand()%10)+3; i++)
-	{
-		float book_lx = mutateNumber(5.5, 1.0);
-		float book_ly = mutateNumber(1.5, 1.0);
-		float book_lz = mutateNumber(8.0, 1.0);
-		vec3 white = {1.0, 1.0, 1.0};
-		c.addModel(new Book(sIF, next_book_origin, book_lx, book_ly, book_lz, randomColor(), white, randomColor(), randomColor()));
-		next_book_origin = next_book_origin+cryph::AffVector(0, book_ly, 0);
-	}
+	// //Books
+	// cryph::AffPoint next_book_origin = shelf_origin;
+	// for (int i = 0; i < (rand()%10)+3; i++)
+	// {
+	// 	float book_lx = mutateNumber(5.5, 1.0);
+	// 	float book_ly = mutateNumber(1.5, 1.0);
+	// 	float book_lz = mutateNumber(8.0, 1.0);
+	// 	vec3 white = {1.0, 1.0, 1.0};
+	// 	c.addModel(new Book(sIF, next_book_origin, book_lx, book_ly, book_lz, randomColor(), white, randomColor(), randomColor()));
+	// 	next_book_origin = next_book_origin+cryph::AffVector(0, book_ly, 0);
+	// }
 }
 
 void createScene(ExtendedController& c, ShaderIF* sIF)

@@ -24,7 +24,7 @@ private:
 	float xmin, xmax, ymin, ymax, zmin, zmax;
 	ShaderIF* shaderIF;
 	float ka[3], kd[3];
-	Block* blocks[4];
+	Block* blocks[5];
 };
 
 #endif
