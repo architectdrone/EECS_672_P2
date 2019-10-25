@@ -89,7 +89,7 @@ void createScene(ExtendedController& c, ShaderIF* sIF)
 	float book_lx = 5.5;
 	float book_ly = 1.5;
 	float book_lz = 8;
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		fillShelf(c, sIF, shelf_origin);
 		shelf_origin = shelf_origin + cryph::AffVector(0, 0, 18);
@@ -130,10 +130,7 @@ void set3DViewingInformation(double overallBB[])
 	//Compute/set ecZmin, ecZmax (It is often useful to exaggerate these limits somewhat to prevent unwanted depth clipping.)
 	double ecZmin, ecZmax, ecXmin, ecXmax, ecYmin, ecYmax, ecZpp, ecProjDir;
 
-	ecXmin = ecYmin = 0-r;
-	ecXmax = ecXmin = r;
-
-	ecZmin = -d-r;
+	ecZmin = -d-r-10;
 	ecZmax = -d+r;
 	ModelView::setECZminZmax(ecZmin, ecZmax);
 
@@ -144,7 +141,7 @@ void set3DViewingInformation(double overallBB[])
 
 int main(int argc, char* argv[])
 {
-	ExtendedController c("NEAT", MVC_USE_DEPTH_BIT);
+	ExtendedController c("Owen's Shelves", MVC_USE_DEPTH_BIT);
 	c.reportVersions(std::cout);
 
 	ShaderIF* sIF = new ShaderIF("shaders/basic.vsh", "shaders/phong.fsh");
