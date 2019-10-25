@@ -42,7 +42,7 @@ Book::Book(ShaderIF* sIF, cryph::AffPoint origin, float lx, float ly, float lz, 
 	blocks[2] = new Block(sIF, r3_origin.x, r3_origin.y, r3_origin.z, r3_lx, r3_ly, r3_lz, back_color, back_color);
 
 	//Spine
-	cryph::AffPoint r4_origin = origin;
+	cryph::AffPoint r4_origin = origin+cryph::AffPoint(cl, 0, 0);
 	float r4_lx = ct;
 	float r4_ly = 2*ct+pt;
 	float r4_lz = ch;
